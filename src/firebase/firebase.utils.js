@@ -32,7 +32,6 @@ const config = {
         }
 
       } 
-      console.log(snapShopt);
       
       return userRef;
   }
