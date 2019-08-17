@@ -2,7 +2,7 @@ import React from 'react'
 import './checkout-item.styles.scss'
 
 const CheckoutItem = ({ cartItem: { name, imageUrl, price, quantity } }) => (
-    <div key={id} className='checkout-item'>
+    <div className='checkout-item'>
         <div className='image-container'>
             <img alt='item' src={imageUrl} />
         </div>
