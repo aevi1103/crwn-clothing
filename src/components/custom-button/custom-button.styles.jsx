@@ -38,6 +38,10 @@ const collectionPreviewStyles = css`
     position: absolute;
     top: 255px;
     display: none;
+
+    background-color: black;
+    color: white;
+    
 `
 
 const getButtonStyles = props => {

@@ -7,3 +7,7 @@ export const selectCurrentuser = createSelector(
     user => user.currentUser
 )
 
+export const selectSignUp = createSelector(
+    [selectUser],
+    user => user.signUp
+)
