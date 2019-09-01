@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -16,60 +16,28 @@ import CheckoutPage from './pages/checkout/checkout.component'
 import { selectCollectionsForPreview } from './redux/shop/shop.selector'
 import { checkUserSession } from './redux/user/user.action'
 
-class App extends React.Component {
+const App = ({ currentUser, checkUserSession }) => {
 
-  unSubscribeFromAuth = null;
+  useEffect(() => {
+    checkUserSession()
+  },[checkUserSession])
+
   
-  componentDidMount() {
-
-    const { checkUserSession } = this.props;
-    checkUserSession();
-
-    //usinf observables in firebase
-    // this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot(snapShot => {
-
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data()
-    //       })
-
-    //     });
-
-    //   } else {
-    //     setCurrentUser(userAuth);
-    //   }
-      
-    //   // addCollectionAndCocuments('collections', collectionsArray.map(({title, items}) => ({title, items})))
-    // })
-  }
-  
-  componentWillUnmount() {
-    this.unSubscribeFromAuth();
-  }
-  
-  render() {
-
-    const { currentUser } = this.props;
-
-    return (
-      <div>
-        <Header/>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route exact path="/signin" 
-            render={() => currentUser 
-                          ? (<Redirect to='/'/>)
-                          : (<SignInAndSignUpPage/>)
-                        } />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header/>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+        <Route exact path="/signin" 
+          render={() => currentUser 
+                        ? (<Redirect to='/'/>)
+                        : (<SignInAndSignUpPage/>)
+                      } />
+      </Switch>
+    </div>
+  );
 
 }
 

@@ -10,8 +10,6 @@ import {
 
 export function* fetchCollectionsAsync() {
 
-    yield console.log('I am fired');
-
     try {
         
         const collectionref = firestore.collection('collections');
